@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Запись — Студия Звукозаписи</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init('3G8S9IE8jE5RgbrMU'); // ← Замени на свой public key
+    })();
+  </script>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="about.html">Про нас</a></li>
+        <li><a href="contact.html">Контакты</a></li>
+        <li><a href="booking.html">Запись</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h2>Запись на сессию</h2>
+    <form id="booking-form">
+      <label>Имя:<input type="text" name="firstName" required /></label>
+      <label>Фамилия:<input type="text" name="lastName" required /></label>
+      <label>Email:<input type="email" name="email" required /></label>
+      <label>Телефон:<input type="tel" name="phone" required /></label>
+      <label>Выберите услугу:
+        <select name="service" required>
+          <option value="Запись вокала">Запись вокала</option>
+          <option value="Сведение">Сведение</option>
+          <option value="Мастеринг">Мастеринг</option>
+          <option value="Аренда студии">Аренда студии</option>
+        </select>
+      </label>
+      <label>Время:
+        <select name="time" required>
+          <option value="Суббота 17:00">Суббота 17:00</option>
+          <option value="Суббота 17:30">Суббота 17:30</option>
+          <option value="Суббота 18:00">Суббота 18:00</option>
+          <option value="Суббота 18:30">Суббота 18:30</option>
+          <option value="Суббота 19:00">Суббота 19:00</option>
+          <option value="Воскресенье 17:00">Воскресенье 17:00</option>
+          <option value="Воскресенье 17:30">Воскресенье 17:30</option>
+          <option value="Воскресенье 18:00">Воскресенье 18:00</option>
+          <option value="Воскресенье 18:30">Воскресенье 18:30</option>
+          <option value="Воскресенье 19:00">Воскресенье 19:00</option>
+        </select>
+      </label>
+      <button type="submit">Записаться</button>
+    </form>
+    <div id="message"></div>
+  </main>
+  <footer>
+    <p>&copy; 2025 Студия Звукозаписи</p>
+  </footer>
+  <script>
+    document.getElementById('booking-form')?.addEventListener('submit', function (e) {
+      e.preventDefault();
+      emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+        .then(() => {
+          document.getElementById('message').innerText = 'Спасибо! Ваша заявка отправлена.';
+          this.reset();
+        }, (error) => {
+          document.getElementById('message').innerText = 'Ошибка отправки. Попробуйте позже.';
+          console.error('EmailJS Error:', error);
+        });
+    });
+  <script src="script.js"></script>
+</body>
+</html>
